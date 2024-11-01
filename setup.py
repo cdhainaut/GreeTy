@@ -19,7 +19,7 @@ with open(init_path) as f:
 
 setup(
     name="greety",
-    version="0.2.10",
+    version="0.2.11",
     author="Charles Dhainaut",
     author_email="ch.dhainaut@gmail.com",
     description="A sample package compiled with Cython",
@@ -27,7 +27,7 @@ setup(
     long_description_content_type="text/markdown",
     packages=["greety"],
     ext_modules=cythonize(extensions, compiler_directives={"language_level": "3"}),
-    include_package_data=True,
+    include_package_data=False,
     exclude_package_data={
         "": ["*.py", "*.pyc", "*.c"],
     },
