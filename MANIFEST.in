@@ -1,2 +1,2 @@
 # Exclude all .py files from the final package
-recursive-exclude *.py *.c *.pyc
+global-exclude *.py *.c *.pyc
