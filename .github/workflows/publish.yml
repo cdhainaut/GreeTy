@@ -29,7 +29,7 @@ jobs:
           CIBW_BUILD: "cp37-* cp38-* cp39-* cp310-*" # Choose specific Python versions if needed
           CIBW_SKIP: "pp*" # Skip PyPy builds (optional)
         run: |
-          cibuildwheel --output-dir dist
+          cibuildwheel --output-dir dist --verbosity 2
 
       - name: Publish to PyPI
         if: github.ref_type == 'tag' || github.event_name == 'workflow_dispatch'
