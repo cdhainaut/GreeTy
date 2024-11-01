@@ -15,5 +15,6 @@ setup(
     long_description_content_type="text/markdown",
     packages=["greety"],
     ext_modules=cythonize(extensions, compiler_directives={"language_level": "3"}),
+    include_package_data=True,
     zip_safe=False,
 )
