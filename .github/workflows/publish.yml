@@ -3,8 +3,8 @@ name: Publish Package
 on:
   push:
     tags:
-      - "v*.*.*" # Triggers on version tags, e.g., "v1.0.0"
-  workflow_dispatch: # Allows manual triggering
+      - "v*.*.*"
+  workflow_dispatch:
 
 jobs:
   build-and-publish:
@@ -24,12 +24,17 @@ jobs:
           python -m pip install --upgrade pip
           pip install cibuildwheel twine
 
+      - name: Pre-compile Cython files
+        run: |
+          python -m pip install cython
+          cythonize -i greety/*.pyx  # Adjust to your actual package path
+
       - name: Build wheels with cibuildwheel
         env:
-          CIBW_BUILD: "cp37-* cp38-* cp39-* cp310-*" # Choose specific Python versions if needed
-          CIBW_SKIP: "pp*" # Skip PyPy builds (optional)
+          CIBW_BUILD: "cp37-* cp38-* cp39-* cp310-*"
+          CIBW_ENVIRONMENT: "CIBW_LOGGING_LEVEL=DEBUG"  # Set the logging level
         run: |
-          cibuildwheel --output-dir dist --verbosity 2
+          cibuildwheel --output-dir dist
 
       - name: Publish to PyPI
         if: github.ref_type == 'tag' || github.event_name == 'workflow_dispatch'
