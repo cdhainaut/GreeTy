@@ -1,10 +1,10 @@
 [build-system]
-requires = ["setuptools", "wheel", "Cython"]
+requires = ["setuptools>=61.0", "wheel", "Cython"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "greety"  # Replace with your package name
-version = "0.2.15"  # Replace with your package version
+version = "0.2.16"  # Replace with your package version
 description = "A brief description of your package"
 authors = [
     { name = "Your Name", email = "your.email@example.com" }
