@@ -22,17 +22,21 @@ jobs:
       - name: Install build dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install cibuildwheel twine
+          pip install cibuildwheel twine cython
 
       - name: Pre-compile Cython files
+        # Check if .pyx files exist before running cythonize
         run: |
-          python -m pip install cython
-          cythonize -i greety/*.pyx  # Adjust to your actual package path
+          if ls greety/*.pyx 1> /dev/null 2>&1; then
+            cythonize -i greety/*.pyx
+          else
+            echo "No .pyx files found to compile."
+          fi
 
       - name: Build wheels with cibuildwheel
         env:
           CIBW_BUILD: "cp37-* cp38-* cp39-* cp310-*"
-          CIBW_ENVIRONMENT: "CIBW_LOGGING_LEVEL=DEBUG"  # Set the logging level
+          CIBW_ENVIRONMENT: "CIBW_LOGGING_LEVEL=DEBUG"
         run: |
           cibuildwheel --output-dir dist
 
