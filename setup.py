@@ -19,7 +19,7 @@ with open(init_path) as f:
 
 setup(
     name="greety",
-    version="0.2.7",
+    version="0.2.8",
     author="Charles Dhainaut",
     author_email="ch.dhainaut@gmail.com",
     description="A sample package compiled with Cython",
