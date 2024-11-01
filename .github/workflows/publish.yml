@@ -1,0 +1,35 @@
+name: Publish Package
+
+on:
+  push:
+    tags:
+      - "v*.*.*" # Triggers on version tags, e.g., "v1.0.0"
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.x"
+
+      - name: Install Cython and build tools
+        run: |
+          python -m pip install --upgrade pip
+          pip install setuptools wheel twine Cython
+
+      - name: Build package
+        run: |
+          python setup.py sdist bdist_wheel
+
+      - name: Publish to PyPI
+        env:
+          TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
+          TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
+        run: |
+          twine upload dist/*
