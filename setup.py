@@ -19,7 +19,7 @@ with open(init_path) as f:
 
 setup(
     name="greety",
-    version="0.2.13",
+    version="0.2.14",
     author="Charles Dhainaut",
     author_email="ch.dhainaut@gmail.com",
     description="A sample package compiled with Cython",
@@ -29,4 +29,6 @@ setup(
     ext_modules=cythonize(extensions, compiler_directives={"language_level": "3"}),
     include_package_data=False,
     zip_safe=False,
+    package_data={"": ["*.so"]},  # Include only .so files in packages
+    exclude_package_data={"": ["*.py"]},  # Exclude all .py files
 )
