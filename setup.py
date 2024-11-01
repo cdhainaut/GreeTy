@@ -1,14 +1,25 @@
 from setuptools import setup, Extension
 from Cython.Build import cythonize
 import os
-from greety import __version__
+from pathlib import Path
+
 
 # Define Cython extensions
 extensions = [Extension("greety.example", ["greety/example.py"])]
 
+init_path = Path(__file__).parent / "greety" / "__init__.py"
+
+with open(init_path) as f:
+    for line in f:
+        if line.startswith("__version__"):
+            version = line.split("=")[1].strip().strip('"').strip("'")
+            break
+    else:
+        raise RuntimeError("Unable to find version string.")
+
 setup(
     name="greety",
-    version=__version__,
+    version=version,
     author="Charles Dhainaut",
     author_email="ch.dhainaut@gmail.com",
     description="A sample package compiled with Cython",
