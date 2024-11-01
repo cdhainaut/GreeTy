@@ -2,8 +2,23 @@
 requires = ["setuptools", "wheel", "Cython"]
 build-backend = "setuptools.build_meta"
 
-[tool.setuptools.package-data]
-"" = ["*.so"]
+[project]
+name = "greety"  # Replace with your package name
+version = "0.2.0"  # Replace with your package version
+description = "A brief description of your package"
+authors = [
+    { name = "Your Name", email = "your.email@example.com" }
+]
+license = { text = "MIT" }  # Change to your license type
+readme = "README.md"  # Path to your README file
+homepage = "https://github.com/yourusername/greety"  # Your project homepage
+repository = "https://github.com/yourusername/greety"  # Your GitHub repository URL
+keywords = ["example", "greety"]  # Keywords for your package
+
+[project.urls]
+"Bug Tracker" = "https://github.com/yourusername/greety/issues"
+"Documentation" = "https://yourpackage.readthedocs.io/"
+
 
 [tool.setuptools.exclude-package-data]
 "" = ["*.py"]
