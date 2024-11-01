@@ -32,6 +32,12 @@ jobs:
         run: |
           cibuildwheel --output-dir dist
 
+      - name: List contents of the dist folder
+        # List the contents of the dist folder for debugging
+        run: |
+          echo "Listing contents of the dist directory:"
+          find dist -type f
+
       - name: Remove Python source files from the wheel
         run: |
           find dist -type f -name "*.py" -delete
