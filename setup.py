@@ -1,13 +1,14 @@
 from setuptools import setup, Extension
 from Cython.Build import cythonize
 import os
+from greety import __version__
 
 # Define Cython extensions
 extensions = [Extension("greety.example", ["greety/example.py"])]
 
 setup(
     name="greety",
-    version="0.1.0",
+    version=__version__,
     author="Charles Dhainaut",
     author_email="ch.dhainaut@gmail.com",
     description="A sample package compiled with Cython",
