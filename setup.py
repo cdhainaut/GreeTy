@@ -7,7 +7,7 @@ from pathlib import Path
 # Define Cython extensions
 extensions = [Extension("greety.example", ["greety/example.py"])]
 
-init_path = Path(__file__).parent / "greety" / "__init__.py"
+""" init_path = Path(__file__).parent / "greety" / "__init__.py"
 
 with open(init_path) as f:
     for line in f:
@@ -15,11 +15,11 @@ with open(init_path) as f:
             version = line.split("=")[1].strip().strip('"').strip("'")
             break
     else:
-        raise RuntimeError("Unable to find version string.")
+        raise RuntimeError("Unable to find version string.") """
 
 setup(
     name="greety",
-    version=version,
+    version="0.2.6",
     author="Charles Dhainaut",
     author_email="ch.dhainaut@gmail.com",
     description="A sample package compiled with Cython",
