@@ -32,6 +32,11 @@ jobs:
         run: |
           cibuildwheel --output-dir dist
 
+      - name: Remove Python source files from the wheel
+        run: |
+          find dist -type f -name "*.py" -delete
+          find dist -type f -name "*.pyc" -delete
+
       - name: Publish to PyPI
         if: github.ref_type == 'tag' || github.event_name == 'workflow_dispatch'
         env:
