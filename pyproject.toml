@@ -21,4 +21,4 @@ repository = "https://github.com/yourusername/greety"  # Your GitHub repository 
 
 
 [tool.setuptools.exclude-package-data]
-"" = ["*.py"]
+greety = ["*.py"]
