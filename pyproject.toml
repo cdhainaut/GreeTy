@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "greety"  # Replace with your package name
-version = "0.2.17"  # Replace with your package version
+version = "0.2.18"  # Replace with your package version
 description = "A brief description of your package"
 authors = [
     { name = "Your Name", email = "your.email@example.com" }
@@ -22,10 +22,3 @@ repository = "https://github.com/yourusername/greety"  # Your GitHub repository 
 [tool.setuptools]
 package-dir = {"" = "."}
 include-package-data = false
-
-[tool.setuptools.packages.find]
-where = ["."]
-include = ["greety*"]
-
-[tool.setuptools.exclude-package-data]
-"*" = ["*.py"]
