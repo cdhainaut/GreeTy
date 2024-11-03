@@ -1,3 +1,0 @@
-# Exclude all .py files from the final package
-exclude *.py
-recursive-exclude greety *.py

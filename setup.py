@@ -1,21 +1,28 @@
-from setuptools import setup, Extension
+from setuptools import setup, Extension, find_packages
 from Cython.Build import cythonize
-import os
 from pathlib import Path
 
 
-# Define Cython extensions
-extensions = [Extension("greety.example", ["greety/example.py"])]
+def get_ext_paths(root_dir):
+    return list(Path(root_dir).rglob("*.py"))
 
-""" init_path = Path(__file__).parent / "greety" / "__init__.py"
 
-with open(init_path) as f:
-    for line in f:
-        if line.startswith("__version__"):
-            version = line.split("=")[1].strip().strip('"').strip("'")
-            break
-    else:
-        raise RuntimeError("Unable to find version string.") """
+# Define the root directory for the package
+package_dir = Path(__file__).parent / "greety"
+# Get paths of all .py files in the directory
+extension_sources = get_ext_paths(package_dir)
+
+# Create a single Cython extension
+ext_modules = [
+    Extension(
+        "greety",  # Name of the compiled module
+        sources=[str(src) for src in extension_sources],
+        include_dirs=[str(package_dir)],
+    )
+]
+
+# Compile the extension using Cython
+ext_modules = cythonize(ext_modules, compiler_directives={"language_level": "3"})
 
 setup(
     name="greety",
@@ -25,10 +32,8 @@ setup(
     description="A sample package compiled with Cython",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
-    packages=["greety"],
-    ext_modules=cythonize(extensions, compiler_directives={"language_level": "3"}),
+    packages=[],  # Keep it empty to avoid packaging source files
+    ext_modules=ext_modules,
     include_package_data=False,
     zip_safe=False,
-    package_data={"": ["*.so"]},  # Include only .so files in packages
-    exclude_package_data={"": ["*.py"]},  # Exclude all .py files
 )
